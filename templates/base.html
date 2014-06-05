@@ -1,0 +1,46 @@
+{% load wwwtags %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    {% block head %}{% endblock head %}
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "/static/css/style.css" %}">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item {% is_page_active request "blog-home" %}" href="{% url "blog-home" %}">Home</a>
+          {% if request.user.is_superuser %}
+              <a class="blog-nav-item {% is_page_active request "blog-post" %}" href="{% url "blog-post" %}">Post</a>
+          {% endif %}
+          <a class="blog-nav-item {% is_page_active request "blog-about" %}" href="{% url 'blog-about' %}">About</a>
+        </nav>
+      </div>
+    </div>
+        <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">{% page_title %}</h1>
+        <p class="lead blog-description">{% site_desc %}</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+          {% block content %}{% endblock content %}
+{#          <ul class="pager">#}
+{#            <li><a href="#">Previous</a></li>#}
+{#            <li><a href="#">Next</a></li>#}
+{#          </ul>#}
+        </div><!-- /.blog-main -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</body>
+</html>

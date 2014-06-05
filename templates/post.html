@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if error %}<p>{{ error }}</p>{% endif %}
+    <form action="{% url "blog-post" %}" method="post">
+    {% csrf_token %}
+    <table>
+    {{ forms }}
+        <tr>
+            <th><button>Submit</button></th>
+        </tr>
+    </table>
+    </form>
+{% endblock %}
