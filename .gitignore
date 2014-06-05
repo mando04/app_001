@@ -1,3 +1,5 @@
 *.pyc
 server
 .idea
+nohup.out
+db.sqlite3
